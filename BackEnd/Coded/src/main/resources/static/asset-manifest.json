@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.62d1cc55.css",
+    "main.js": "/static/js/main.fe82eaad.js",
+    "static/media/NanumGothic-Regular.ttf": "/static/media/NanumGothic-Regular.6c84540de7730f833d6c.ttf",
+    "static/media/Roboto-Regular.ttf": "/static/media/Roboto-Regular.fc2b5060f7accec5cf74.ttf",
+    "static/media/kakao_hb.png": "/static/media/kakao_hb.fde61e83834537576597.png",
+    "static/media/kakao.png": "/static/media/kakao.75ebd791cfe77157dd1b.png",
+    "static/media/navLogo.png": "/static/media/navLogo.3d2d10bfa46ddc065aec.png",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.62d1cc55.css.map": "/static/css/main.62d1cc55.css.map",
+    "main.fe82eaad.js.map": "/static/js/main.fe82eaad.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.62d1cc55.css",
+    "static/js/main.fe82eaad.js"
+  ]
+}
