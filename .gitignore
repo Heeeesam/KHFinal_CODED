@@ -317,3 +317,12 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/java,windows,eclipse,maven,react,git
+
+# 추가
+# IntelliJ 설정 추가
+.idea/**/vcs.xml
+
+# 빌드 리소스
+BackEnd/**/resources/static
+# 이미지 리소스
+BackEnd/**/webapp/images
