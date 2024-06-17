@@ -140,7 +140,8 @@ public class SecurityConfiguration {
 			"/follow/isfollow",
 			"/feedpost/isScrap",
 			"/auth/logout",
-			"/photo/insertChatPhoto"
+			"/photo/insertChatPhoto",
+			"/feedPopularList"
 
 	};
 	private final String[] API_USER_LIST = {
