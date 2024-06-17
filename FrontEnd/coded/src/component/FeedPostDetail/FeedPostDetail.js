@@ -10,6 +10,7 @@ import FeedListNavi from './FeedListNavi';
 import { Like, Temperature } from '../../assets/ModalAsset/ModalAsset';
 import ConfirmDialog from '../Common/ConfirmDialog';
 import FeedListImgLoadingBar from '../Common/FeedListImgLoadingBar';
+import Resizer from 'react-image-file-resizer';
 
 const FeedPostDetail = (props) => {
   const { feedType, feedPost } = props;
@@ -172,6 +173,63 @@ const FeedPostDetail = (props) => {
     }
   }
 
+  /**
+   * 이미지 리사이징 추가
+   */
+  const resizeImage = (file) => {
+    return new Promise((resolve, reject) => {
+      Resizer.imageFileResizer(
+        file,
+        400, // 새로운 이미지의 너비
+        400, // 새로운 이미지의 높이
+        'JPEG', // 새로운 이미지의 형식 (JPEG, PNG, WEBP 등)
+        30, // 새로운 이미지의 품질 (0-100)
+        0, // 회전 각도 (0, 90, 180, 270 등)
+        (uri) => {
+          resolve(uri);
+        },
+        'base64', // 반환 형식 (base64 또는 파일 객체)
+      );
+    });
+  };
+
+  function resizingImage(imageUrl) {
+    const [resizedImageUrl, setResizedImageUrl] = useState(null);
+
+    useEffect(() => {
+      const fetchAndResizeImage = async () => {
+        try {
+          const response = await fetch(imageUrl);
+          const blob = await response.blob();
+          const resizedImageUri = await resizeImage(blob);
+          setResizedImageUrl(resizedImageUri);
+        } catch (error) {
+          console.error('이미지 로딩 및 리사이징 오류:', error);
+        }
+      };
+
+      if (imageUrl) {
+        fetchAndResizeImage();
+      }
+    }, [imageUrl]);
+
+    return (
+      <>
+        {resizedImageUrl ? (
+          <img
+            className={styles.thumbNail}
+            src={resizedImageUrl}
+            alt="Resized Image"
+            onLoad={handleThumbNailLoaded}
+            onError={handleThumbNailLoaded}
+          />
+        ) : (
+          <img className={styles.thumbNail} src={`/images/test.jpg`} />
+        )}
+      </>
+    );
+  }
+
   return (
     <div
       className={styles.feedInnerParentDiv}
@@ -193,18 +251,9 @@ const FeedPostDetail = (props) => {
             <FeedListNavi></FeedListNavi>
           </nav> */}
           {myfeedpost.thumbNailSysName != null ? (
-            <img
-              className={styles.thumbNail}
-              src={`/images/${myfeedpost.thumbNailSysName}`}
-              onLoad={handleThumbNailLoaded}
-              onError={handleThumbNailLoaded}
-            ></img>
+            resizingImage(`/images/${myfeedpost.thumbNailSysName}`)
           ) : (
-            <img
-              className={styles.thumbNail}
-              src={`/images/test.jpg`}
-              onLoad={handleThumbNailLoaded}
-            ></img>
+            <img className={styles.thumbNail} src={`/images/test.jpg`} />
           )}
           {isThumbNailLoaded ? null : <FeedListImgLoadingBar />}
         </div>
