@@ -57,7 +57,7 @@ public class SecurityConfiguration {
 			"/images/**",
 			"/manifest.json",
 			"/logo192.png",
-			
+
 			//pages
 			"/login",
 			"/register",
@@ -73,15 +73,15 @@ public class SecurityConfiguration {
 			"/error",
 			"/HomePage",
 			"/Admin/**",
-			
-			
+
+
 			"/searchBox",
 			"/TestComponent",
 			"/test/feedComment",
 			"/test/FeedInsert",
 			"/test/follow",
 			"/test/TodayAndAdForm",
-			
+
 			"/auth/userNo",
 			//"/feedList/**",
 			//"/feedpost/**",
@@ -112,7 +112,7 @@ public class SecurityConfiguration {
 			"/PostHashs/selectAllPostTagNames",
 			"/feedpost/selectSearchHashFeedList/**",
 			"/feedpost/selectPopularFeedPost",
-			
+
 			"/feedpost/selectfeedlist/",
 			"/auth/selectUserList",
 			"/photo/testedBySelectPhoto",
@@ -141,8 +141,8 @@ public class SecurityConfiguration {
 			"/feedpost/isScrap",
 			"/auth/logout",
 			"/photo/insertChatPhoto",
-			"/feedPopularList"
-
+			"/feedPopularList",
+			"/photo/images/**",
 	};
 	private final String[] API_USER_LIST = {
 			"/weather/**",

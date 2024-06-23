@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kh.coded.services.ThumbNailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +28,8 @@ public class PhotoController {
     private PhotoService photoService;
     @Autowired
     private JwtProvider jwtProvider;
+    @Autowired
+    private ThumbNailService thumbNailService;
 
     // 사진 입력 전용 메소드
     // 어떤 파라미터를 넘기냐에 따라 각각 해당 컬럼으로 값을 넣고 나머지 값은 null로 고정
@@ -107,6 +112,20 @@ public class PhotoController {
         int messageId = photoService.insertChatPhoto(realPath,files);
         return ResponseEntity.ok().body(messageId);
     }
+
+    /**
+     * 썸네일 이미지 리사이징 구현
+     * 이미지 파일의 src 속성을 해당 엔드포인트로 수정 시 이미지 리사이징
+     */
+    @GetMapping("/images/{fileName}")
+    public ResponseEntity<byte[]> getThumbNail(@PathVariable("fileName") String fileName) throws Exception {
+            byte[] image = thumbNailService.getThumbNail(fileName);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            headers.setCacheControl("max-age=1800");
+            return ResponseEntity.ok().headers(headers).body(image);
+    }
+
 }
 //    @PostMapping("/removeFile")
 //    public ResponseEntity<Boolean> removeFile(String fileName){
