@@ -64,6 +64,7 @@ function FeedList({ type }) {
   const feedPostOuterRef = useRef(null);
   const cpage = useRef(1);
   const [pageLoading, setPageLoading] = useState(false);
+  const [isOverPaging, setIsOverPaging] = useState(false);
 
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.member.access);
@@ -112,7 +113,7 @@ function FeedList({ type }) {
   }, [accessToken]);
 
   const addFeedList = () => {
-    if (!pageLoading) {
+    if (!pageLoading && !isOverPaging) {
       setPageLoading(true);
       if (type === 'recent') {
         axios({
@@ -126,6 +127,7 @@ function FeedList({ type }) {
             setFeedPost((prev) => [...prev, ...resp.data]);
             cpage.current = cpage.current + 1;
             setPageLoading(false);
+            resp.data && resp.data.length == 0 && setIsOverPaging(true);
           })
           .catch((error) => {
             console.log(error);
@@ -143,6 +145,7 @@ function FeedList({ type }) {
             setFeedPost((prev) => [...prev, ...response.data]);
             cpage.current = cpage.current + 1;
             setPageLoading(false);
+            resp.data && resp.data.length == 0 && setIsOverPaging(true);
           })
           .catch((error) => {
             console.log(error);
@@ -165,6 +168,7 @@ function FeedList({ type }) {
                 setFeedPost((prev) => [...prev, ...response.data]);
                 cpage.current = cpage.current + 1;
                 setPageLoading(false);
+                resp.data && resp.data.length == 0 && setIsOverPaging(true);
               })
               .catch((error) => {
                 console.log(error);
@@ -185,6 +189,7 @@ function FeedList({ type }) {
                 setFeedPost((prev) => [...prev, ...response.data]);
                 cpage.current = cpage.current + 1;
                 setPageLoading(false);
+                resp.data && resp.data.length == 0 && setIsOverPaging(true);
               })
               .catch((error) => {
                 console.log(error);
@@ -204,7 +209,8 @@ function FeedList({ type }) {
   // document.body.offsetHeight 페이지 전체 총 높이
   window.onscroll = function () {
     if (
-      window.innerHeight + window.scrollY + 200 >=
+      !pageLoading &&
+      window.innerHeight + window.scrollY + 20 >=
       document.body.offsetHeight
     ) {
       addFeedList();
