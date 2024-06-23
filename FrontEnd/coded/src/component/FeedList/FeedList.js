@@ -123,11 +123,11 @@ function FeedList({ type }) {
             cpage: cpage.current,
           },
         })
-          .then((resp) => {
-            setFeedPost((prev) => [...prev, ...resp.data]);
+          .then((response) => {
+            setFeedPost((prev) => [...prev, ...response.data]);
             cpage.current = cpage.current + 1;
             setPageLoading(false);
-            resp.data && resp.data.length == 0 && setIsOverPaging(true);
+            response.data && response.data.length == 0 && setIsOverPaging(true);
           })
           .catch((error) => {
             console.log(error);
@@ -145,7 +145,7 @@ function FeedList({ type }) {
             setFeedPost((prev) => [...prev, ...response.data]);
             cpage.current = cpage.current + 1;
             setPageLoading(false);
-            resp.data && resp.data.length == 0 && setIsOverPaging(true);
+            response.data && response.data.length == 0 && setIsOverPaging(true);
           })
           .catch((error) => {
             console.log(error);
@@ -168,7 +168,7 @@ function FeedList({ type }) {
                 setFeedPost((prev) => [...prev, ...response.data]);
                 cpage.current = cpage.current + 1;
                 setPageLoading(false);
-                resp.data && resp.data.length == 0 && setIsOverPaging(true);
+                response.data && response.data.length == 0 && setIsOverPaging(true);
               })
               .catch((error) => {
                 console.log(error);
@@ -189,7 +189,7 @@ function FeedList({ type }) {
                 setFeedPost((prev) => [...prev, ...response.data]);
                 cpage.current = cpage.current + 1;
                 setPageLoading(false);
-                resp.data && resp.data.length == 0 && setIsOverPaging(true);
+                response.data && response.data.length == 0 && setIsOverPaging(true);
               })
               .catch((error) => {
                 console.log(error);
